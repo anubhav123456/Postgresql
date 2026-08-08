@@ -206,3 +206,51 @@ WHERE NICKNAME IS NOT NULL
 -- 10 | AMAN     | BUILDING REST APIs     | 67
 -- 11 | KAVYA    |                        | 5
 -- 13 | VIKRAM   | LEARNING SYSTEM DESIGN | 81
+
+
+-- =====================================================
+-- 10. ACCOUNTS
+-- =====================================================
+
+SELECT * FROM BASICS.ACCOUNTS;
+
+-- Expected Output:
+--
+-- ID | FULL_NAME       | EMAIL                        | IS_ACTIVE | AGE
+-- ---+-----------------+------------------------------+-----------+----
+-- 1  | Anubhav Gupta   | anubhav.gupta@gmail.com      | true      | 25
+-- 2  | Rahul Sharma    | rahul.sharma@gmail.com       | true      | 28
+-- 3  | Priya Verma     | priya.verma@gmail.com        | true      | 23
+-- 4  | Arjun Mehta     | arjun.mehta@gmail.com        | true      | 31
+-- 5  | Neha Singh      | neha.singh@gmail.com         | true      | 26
+-- 6  | Rohan Kapoor    | rohan.kapoor@gmail.com       | true      | 29
+-- 7  | Sneha Patel     | sneha.patel@gmail.com        | true      | 22
+-- 8  | Aman Gupta      | aman.gupta@gmail.com         | true      | 35
+-- 9  | Kavya Malhotra  | kavya.malhotra@gmail.com     | true      | 24
+-- 10 | Vikram Rao      | vikram.rao@gmail.com         | true      | 32
+--
+-- CREATED_AT and UPDATED_AT are automatically generated.
+
+
+-- =====================================================
+-- 11. SALES
+-- =====================================================
+
+SELECT * FROM BASICS.SALES;
+
+-- Expected Output:
+--
+-- ID | TITLE                | PRICE
+-- ---+----------------------+--------
+-- 1  | Wireless Mouse       | 799.00
+-- 2  | Mechanical Keyboard  | 2499.00
+-- 3  | USB-C Charger        | 1299.00
+-- 4  | Laptop Stand         | 1599.00
+-- 5  | Bluetooth Speaker    | 1999.00
+-- 6  | Webcam               | 2299.00
+-- 7  | Power Bank           | 1799.00
+-- 8  | Gaming Headset       | 2999.00
+-- 9  | Smart Watch          | 4999.00
+-- 10 | Desk Lamp            | 899.00
+--
+-- CREATED_AT and UPDATED_AT are automatically generated.
