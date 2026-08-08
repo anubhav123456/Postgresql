@@ -1,0 +1,381 @@
+-- ============================================================
+-- DATABASE: postgresql_part1
+-- ============================================================
+--
+-- ============================================================
+-- DATA TYPES USED
+-- ============================================================
+--
+-- 1. SERIAL
+-- ------------------------------------------------------------
+-- Purpose:
+--   Automatically generates an increasing integer value.
+--
+-- Example:
+--   ID SERIAL
+--
+-- Commonly used for:
+--   Auto-incrementing primary keys.
+--
+-- Example values:
+--   1, 2, 3, 4, 5 ...
+--
+--
+-- 2. TEXT
+-- ------------------------------------------------------------
+-- Purpose:
+--   Stores variable-length text/string data.
+--
+-- Example:
+--   NAME TEXT
+--   DESCRIPTION TEXT
+--
+-- Example value:
+--   'Anubhav'
+--   'Learning PostgreSQL'
+--
+--
+-- 3. VARCHAR(100)
+-- ------------------------------------------------------------
+-- Purpose:
+--   Stores variable-length strings with a maximum length.
+--
+-- Example:
+--   NAME VARCHAR(100)
+--
+-- Maximum:
+--   100 characters.
+--
+-- Example:
+--   'Wireless Mouse'
+--
+--
+-- 4. INTEGER
+-- ------------------------------------------------------------
+-- Purpose:
+--   Stores whole numbers.
+--
+-- Example:
+--   AGE INTEGER
+--   STOCK INTEGER
+--   SCORE INTEGER
+--
+-- Example values:
+--   10
+--   25
+--   100
+--
+--
+-- 5. BIGINT
+-- ------------------------------------------------------------
+-- Purpose:
+--   Stores larger whole numbers than INTEGER.
+--
+-- Example:
+--   TOTAL_VIEWS BIGINT
+--
+-- Useful for:
+--   Counters that can grow very large.
+--
+-- Example:
+--   982374982374
+--
+--
+-- 6. NUMERIC(10,2)
+-- ------------------------------------------------------------
+-- Purpose:
+--   Stores exact decimal values.
+--
+-- Example:
+--   PRICE NUMERIC(10,2)
+--
+-- 10 = total number of digits
+-- 2  = digits after decimal point
+--
+-- Example:
+--   99999999.99
+--
+-- Commonly used for:
+--   Money / prices / financial values.
+--
+--
+-- 7. BOOLEAN
+-- ------------------------------------------------------------
+-- Purpose:
+--   Stores TRUE or FALSE.
+--
+-- Example:
+--   IS_ACTIVE BOOLEAN
+--
+-- Possible values:
+--   TRUE
+--   FALSE
+--
+--
+-- 8. UUID
+-- ------------------------------------------------------------
+-- Purpose:
+--   Stores Universally Unique Identifiers.
+--
+-- Example:
+--   ID UUID
+--
+-- Example value:
+--   550e8400-e29b-41d4-a716-446655440000
+--
+-- Useful for:
+--   Unique identifiers, distributed systems, APIs, etc.
+--
+--
+-- 9. JSONB
+-- ------------------------------------------------------------
+-- Purpose:
+--   Stores JSON data in PostgreSQL's binary JSON format.
+--
+-- Example:
+--   METADATA JSONB
+--
+-- Example value:
+--   '{"user_id": 101, "device": "Chrome"}'
+--
+-- Useful for:
+--   Flexible/semi-structured data.
+--
+--
+-- 10. TIMESTAMPTZ
+-- ------------------------------------------------------------
+-- Purpose:
+--   Represents a specific point in time.
+--
+-- Example:
+--   CREATED_AT TIMESTAMPTZ
+--
+-- TIMESTAMPTZ = timestamp with time zone awareness.
+--
+-- Commonly used for:
+--   created_at
+--   updated_at
+--   login_at
+--   payment_at
+--   order_at
+--
+--
+-- ============================================================
+-- CONSTRAINTS USED
+-- ============================================================
+--
+-- 1. PRIMARY KEY
+-- ------------------------------------------------------------
+-- Purpose:
+--   Uniquely identifies every row in a table.
+--
+-- Example:
+--   ID SERIAL PRIMARY KEY
+--
+-- Rules:
+--   - Cannot contain duplicate values.
+--   - Cannot contain NULL.
+--
+-- Example:
+--
+--   ID
+--   --
+--   1      <- valid
+--   2      <- valid
+--   3      <- valid
+--   1      <- ERROR (duplicate)
+--
+--
+-- 2. NOT NULL
+-- ------------------------------------------------------------
+-- Purpose:
+--   Prevents a column from storing NULL.
+--
+-- Example:
+--   NAME TEXT NOT NULL
+--
+-- Meaning:
+--   Every row MUST have a NAME.
+--
+-- This is invalid:
+--
+--   NAME = NULL
+--
+--
+-- 3. UNIQUE
+-- ------------------------------------------------------------
+-- Purpose:
+--   Prevents duplicate values in a column.
+--
+-- Example:
+--   EMAIL TEXT NOT NULL UNIQUE
+--
+-- Example:
+--
+--   anubhav@gmail.com   <- valid
+--   rahul@gmail.com     <- valid
+--   anubhav@gmail.com   <- ERROR (duplicate)
+--
+--
+-- 4. CHECK
+-- ------------------------------------------------------------
+-- Purpose:
+--   Ensures that values satisfy a specific condition.
+--
+-- Example:
+--   AGE INTEGER CHECK(AGE >= 18)
+--
+-- Meaning:
+--   AGE must be 18 or greater.
+--
+-- Valid:
+--   18
+--   25
+--   40
+--
+-- Invalid:
+--   17
+--   10
+--   0
+--
+--
+-- ============================================================
+-- DEFAULT VALUES
+-- ============================================================
+--
+-- 1. DEFAULT 0
+-- ------------------------------------------------------------
+-- Example:
+--   STOCK INTEGER DEFAULT 0
+--
+-- If STOCK is not provided during INSERT:
+--
+--   PostgreSQL automatically uses 0.
+--
+--
+-- 2. DEFAULT TRUE
+-- ------------------------------------------------------------
+-- Example:
+--   IS_ACTIVE BOOLEAN DEFAULT TRUE
+--
+-- If IS_ACTIVE is not provided:
+--
+--   PostgreSQL automatically uses TRUE.
+--
+--
+-- 3. DEFAULT NOW()
+-- ------------------------------------------------------------
+-- Example:
+--   CREATED_AT TIMESTAMPTZ DEFAULT NOW()
+--
+-- Automatically stores the current timestamp when
+-- a row is inserted.
+--
+--
+-- 4. DEFAULT GEN_RANDOM_UUID()
+-- ------------------------------------------------------------
+-- Example:
+--   ID UUID DEFAULT GEN_RANDOM_UUID()
+--
+-- Automatically generates a random UUID for every row.
+--
+--
+-- 5. DEFAULT '{}'::JSONB
+-- ------------------------------------------------------------
+-- Example:
+--   METADATA JSONB DEFAULT '{}'::JSONB
+--
+-- If METADATA is not provided:
+--
+--   PostgreSQL stores an empty JSON object:
+--
+--   {}
+--
+-- ::JSONB is an explicit type cast.
+--
+--
+-- ============================================================
+-- OTHER IMPORTANT FEATURES
+-- ============================================================
+--
+-- 1. GEN_RANDOM_UUID()
+-- ------------------------------------------------------------
+-- Generates a random UUID.
+--
+-- Example:
+--
+--   GEN_RANDOM_UUID()
+--
+-- Result:
+--
+--   550e8400-e29b-41d4-a716-446655440000
+--
+--
+-- 2. NOW()
+-- ------------------------------------------------------------
+-- Returns the current date and time.
+--
+-- Example:
+--
+--   DEFAULT NOW()
+--
+--
+-- 3. ::JSONB
+-- ------------------------------------------------------------
+-- Explicitly converts a value into JSONB.
+--
+-- Example:
+--
+--   '{}'::JSONB
+--
+-- Meaning:
+--
+--   Convert '{}' into JSONB.
+--
+--
+-- 4. DROP TABLE IF EXISTS
+-- ------------------------------------------------------------
+-- Deletes the table if it already exists.
+--
+-- Example:
+--
+--   DROP TABLE IF EXISTS BASICS.STUDENTS;
+--
+-- IF EXISTS prevents an error if the table doesn't exist.
+--
+--
+-- ============================================================
+-- QUICK SUMMARY
+-- ============================================================
+--
+-- DATA TYPES:
+--
+-- SERIAL       -> Auto-increment integer
+-- TEXT         -> String/text
+-- VARCHAR(100) -> String with max 100 characters
+-- INTEGER      -> Whole number
+-- BIGINT       -> Large whole number
+-- NUMERIC      -> Exact decimal number
+-- BOOLEAN      -> TRUE / FALSE
+-- UUID         -> Unique identifier
+-- JSONB        -> JSON data
+-- TIMESTAMPTZ  -> Date/time representing a point in time
+--
+--
+-- CONSTRAINTS:
+--
+-- PRIMARY KEY -> Unique row identifier
+-- NOT NULL    -> Value is mandatory
+-- UNIQUE      -> No duplicate values
+-- CHECK       -> Value must satisfy a condition
+--
+--
+-- DEFAULTS:
+--
+-- DEFAULT 0                  -> Uses 0 if value not provided
+-- DEFAULT TRUE               -> Uses TRUE if value not provided
+-- DEFAULT NOW()              -> Current timestamp
+-- DEFAULT GEN_RANDOM_UUID()  -> Random UUID
+-- DEFAULT '{}'::JSONB        -> Empty JSON object
+--
+-- ============================================================
